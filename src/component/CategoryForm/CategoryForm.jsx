@@ -1,6 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { assets } from '../../assets/assets.';
 
 const CategoryForm = () => {
+  //const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState(false);
+  const [data, setData] = useState({
+    name: '',
+    description: '',
+    bgColor: '#ffffff',
+  });
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+  const onChangeHandler = e => {
+    const value = e.target.value;
+    const name = e.target.name;
+    setData(data => ({ ...data, [name]: value }));
+  };
+
   return (
     <div className="mx-2 mt-2">
       <div className="row">
@@ -9,7 +26,11 @@ const CategoryForm = () => {
             <form action="">
               <div className="mb-1">
                 <label htmlFor="image" className="form-label">
-                  <img src="https://placehold.co/48x48" alt="" width={48} />
+                  <img
+                    src={image ? URL.createObjectURL(image) : assets.upload}
+                    alt=""
+                    width={48}
+                  />
                 </label>
                 <input
                   type="file"
@@ -17,6 +38,7 @@ const CategoryForm = () => {
                   id="image"
                   className="form-control"
                   hidden
+                  onChange={e => setImage(e.target.files[0])}
                 />
               </div>
               <div className="mb-1">
@@ -29,6 +51,8 @@ const CategoryForm = () => {
                   id="name"
                   className="form-control"
                   placeholder="category name"
+                  onChange={onChangeHandler}
+                  value={data.name}
                 />
               </div>
               <div className="mb-1">
@@ -41,6 +65,8 @@ const CategoryForm = () => {
                   id="description"
                   className="form-control"
                   placeholder="write description here ... "
+                  onChange={onChangeHandler}
+                  value={data.description}
                 />
               </div>
               <div className="mb-1">
@@ -53,6 +79,8 @@ const CategoryForm = () => {
                   name="bgcolor"
                   id="bgcolor"
                   placeholder="#ffffff"
+                  onChange={onChangeHandler}
+                  value={data.bgColor}
                 />
               </div>
               <button type="submit" className="btn btn-primary w-100">
