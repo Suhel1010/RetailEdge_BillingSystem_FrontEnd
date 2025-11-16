@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useContext } from 'react';
-import { AppContext } from '../../context/AppContext.jsx';
+import { AppContext } from '../../Context/AppContext.jsx';
 import './CategoryList.css';
 import { deleteCategory } from '../../service/CategoryService.js';
 import toast from 'react-hot-toast';
@@ -24,7 +24,7 @@ const CategoryList = () => {
         toast.error('unable to delete category.');
       }
     } catch (error) {
-      console.error;
+      console.error(error);
       toast.error('something went wrong.');
     }
   };
@@ -52,10 +52,7 @@ const CategoryList = () => {
       <div className="row g-3 pe-2">
         {filterCategories.map((category, index) => (
           <div key={index} className="col-12">
-            <div
-              className="p-3"
-              style={{ backgroundColor: category.backgroundColor }}
-            >
+            <div className="p-3" style={{ backgroundColor: category.bgColor }}>
               <div className="d-flex align-items-center">
                 <div style={{ marginRight: '15px' }}>
                   <img
