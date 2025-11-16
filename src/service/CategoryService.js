@@ -1,13 +1,18 @@
-import axios from "axios";
+import axios from 'axios';
 
-export const addCategory = async (category) => {
-   return await axios.post('http://localhost:8080/api/v1/categories',category);
-}
+export const addCategory = async category => {
+  return await axios.post(
+    'http://localhost:8080/api/v1/admin/categories',
+    category
+  );
+};
 
-export const deleteCategory = async (categoryId) => {
-   return await axios.delete(`http://localhost:8080/api/v1/categories/${categoryId}`);
-}
+export const deleteCategory = async categoryId => {
+  return await axios.delete(
+    `http://localhost:8080/api/v1/admin/categories/${categoryId}`
+  );
+};
 
 export const fetchCategory = async () => {
-   return await axios.get('http://localhost:8080/api/v1/categories');
-}
+  return await axios.get('http://localhost:8080/api/v1/categories');
+};
