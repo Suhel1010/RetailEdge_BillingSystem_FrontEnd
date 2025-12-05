@@ -52,7 +52,10 @@ const CategoryList = () => {
       <div className="row g-3 pe-2">
         {filterCategories.map((category, index) => (
           <div key={index} className="col-12">
-            <div className="p-3" style={{ backgroundColor: category.bgColor }}>
+            <div
+              className="p-3  rounded-2"
+              style={{ backgroundColor: category.bgColor }}
+            >
               <div className="d-flex align-items-center">
                 <div style={{ marginRight: '15px' }}>
                   <img
@@ -63,7 +66,7 @@ const CategoryList = () => {
                 </div>
                 <div className="flex-grow-1">
                   <h5 className="mb-1 text-white">{category.name}</h5>
-                  <p className="mb-0 text-white">5 items</p>
+                  <p className="mb-0 text-white">{category.items} items</p>
                 </div>
                 <div>
                   <button

@@ -1,7 +1,18 @@
-import { Link } from 'react-router-dom';
-import { assets } from '../../assets/assets.';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { assets } from '../../assets/assets..js';
 import './MenuBar.css';
+import { AppContext } from '../../Context/AppContext.jsx';
 const MenuBar = () => {
+  const navigate = useNavigate();
+  const { SetAuthData } = useContext(AppContext);
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    SetAuthData(null, null);
+    navigate('/login');
+  };
   return (
     <div>
       {/* Navbar */}
@@ -49,6 +60,37 @@ const MenuBar = () => {
             </li>
           </ul>
           {/* add user profile */}
+          <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li className="nav-item dropdown">
+              <a
+                href="#"
+                className="nav-link dropdown-toggle"
+                id="navbarDropdown "
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <img src={assets.profile} alt="" height={36} width={36} />
+              </a>
+              <ul
+                className="dropdown-menu dropdown-menu-end"
+                aria-labelledby="navbarDropdown"
+              >
+                <li>
+                  <a href="#" className="dropdown-item">
+                    Setting
+                  </a>
+                  <a href="#" className="dropdown-item">
+                    Activity-log
+                  </a>
+                  <hr className="dropdown-divider" />
+                  <a href="#" className="dropdown-item" onClick={logout}>
+                    Logout
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
       </nav>
       {/* End Navbar */}
