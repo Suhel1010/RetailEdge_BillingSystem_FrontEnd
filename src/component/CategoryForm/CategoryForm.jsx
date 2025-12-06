@@ -44,8 +44,8 @@ const CategoryForm = () => {
         });
         setImage(false);
       }
-    } catch (error) {
-      console.error(error);
+    } catch (e) {
+      console.error(e);
       toast.error('Error adding category.');
     } finally {
       setLoading(false);
