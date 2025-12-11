@@ -1,15 +1,17 @@
 /* eslint-disable react/prop-types */
-import toast from 'react-hot-toast/headless';
+import { toast } from 'react-hot-toast';
 import { AppContext } from '../../Context/AppContext';
 import { createOrder, deleteOrder } from '../../service/OrderService';
 import './CartSummary.css';
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import {
   createRazorpayOrder,
   verifyPayment,
 } from '../../service/PaymentService';
 import { AppConstant } from '../../Utils/Constant';
+import ReceiptPopup from '../ReceiptPopup/ReceiptPopup';
+import { useReactToPrint } from 'react-to-print';
 
 const CartSummary = ({
   mobileNumber,
@@ -27,6 +29,7 @@ const CartSummary = ({
   const [shoPopup, setSowPopup] = useState(false);
   const tax = totalAmount * 0.01;
   const grandTotalAmount = totalAmount + tax;
+  const receiptRef = useRef();
 
   const clearAll = () => {
     setCustomerName(''), setMobileNumber(''), clearCart();
@@ -67,11 +70,11 @@ const CartSummary = ({
 
     const orderData = {
       customerName,
-      mobileNumber,
-      cartItem,
-      totalAmount,
+      phoneNumber: mobileNumber,
+      cartItems: cartItem,
+      subTotal: totalAmount,
       tax,
-      grandTotalAmount,
+      grandTotal: grandTotalAmount,
       paymentMethod: paymentMode.toUpperCase(),
     };
 
@@ -86,7 +89,7 @@ const CartSummary = ({
         const razorpayLoaded = await loadRazorpayScript();
         if (!razorpayLoaded) {
           toast.error('Unable to load razorpay !');
-          await deleteOrderOnFailure(response.data.orderId);
+          await deleteOrderOnFailure(savedData.orderId);
           return;
         } else {
           // create razorpay order
@@ -98,7 +101,7 @@ const CartSummary = ({
             key: AppConstant.RAZORPAY_KEY_ID,
             amount: razorpayResponse.data.amount,
             currency: razorpayResponse.data.currency,
-            order_id: razorpayResponse.data.orderId,
+            order_id: razorpayResponse.data.id,
             name: 'My retails shop',
             description: 'Order Payment',
             handler: async function (response) {
@@ -118,6 +121,7 @@ const CartSummary = ({
               },
             },
           };
+
           const rzp = new window.Razorpay(options);
           rzp.on('payment.failed', async response => {
             await deleteOrderOnFailure(savedData.orderId);
@@ -137,11 +141,12 @@ const CartSummary = ({
 
   const verifyPaymentHandler = async (response, savedOrder) => {
     const paymentData = {
-      razorpayOrderid: response.razorpay_order_id,
+      razorpayOrderId: response.razorpay_order_id,
       razorpayPaymentId: response.razorpay_payment_id,
       razorpaySignature: response.razorpay_signature,
       orderId: savedOrder.orderId,
     };
+
     try {
       const paymentResponse = await verifyPayment(paymentData);
       if (paymentResponse.status === 200) {
@@ -149,11 +154,12 @@ const CartSummary = ({
         setOrderDetails({
           ...savedOrder,
           paymentDetails: {
-            razorpayOrderid: response.razorpay_order_id,
+            razorpayOrderId: response.razorpay_order_id,
             razorpayPaymentId: response.razorpay_payment_id,
             razorpaySignature: response.razorpay_signature,
           },
         });
+        //console.log('Sending to backend ===>', paymentData);
       } else {
         toast.error('Payment processing failed !');
       }
@@ -161,6 +167,10 @@ const CartSummary = ({
       console.log(error);
       toast.error('Payment failed');
     }
+  };
+
+  const handlePrintReceipt = () => {
+    window.print();
   };
 
   return (
@@ -206,6 +216,18 @@ const CartSummary = ({
           Place your order
         </button>
       </div>
+      {shoPopup && orderDetails && (
+        <ReceiptPopup
+          orderDetails={{
+            ...orderDetails,
+            razorpayOrderId: orderDetails.paymentDetails?.razorpayOrderId,
+            razorpayPaymentId: orderDetails.paymentDetails?.razorpayPaymentId,
+            razorpaySignature: orderDetails.paymentDetails?.razorpaySignature,
+          }}
+          onClose={() => setSowPopup(false)}
+          onPrint={handlePrintReceipt}
+        />
+      )}
     </div>
   );
 };

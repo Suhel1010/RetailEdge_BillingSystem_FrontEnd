@@ -1,19 +1,16 @@
 import axios from 'axios';
 
 export const latestOrder = async () => {
-  return await axios.get('http://localhost:8080/api/v1/orders/latest', {
+    return await axios.get('http://localhost:8080/api/v1/orders/latest', {
     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   });
 };
 
 export const createOrder = async order => {
-  return await axios.post(
-    'http://localhost:8080/api/v1/orders/create-order',
-    order,
-    {
-      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-    }
-  );
+  //console.log('sending order payload 1 : ', order);
+  return await axios.post('http://localhost:8080/api/v1/orders', order, {
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+  });
 };
 
 export const deleteOrder = async orderId => {
