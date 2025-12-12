@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { addUser } from '../../service/UserService';
 import toast from 'react-hot-toast';
@@ -23,7 +24,7 @@ const UserForm = ({ setUsers }) => {
         name: '',
         email: '',
         password: '',
-        role: 'Role_User',
+        role: 'ROLE_USER',
       });
     } catch (error) {
       console.error(error);

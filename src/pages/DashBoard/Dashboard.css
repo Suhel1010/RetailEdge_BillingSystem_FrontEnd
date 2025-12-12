@@ -1,27 +1,169 @@
-.dashboard-container {
+/* ------------ GLOBAL WRAPPER ------------ */
+.dashboard-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background: #eef1f7;
+  padding: 15px 20px;
   display: flex;
-  gap: 20px;
-  padding: 20px;
-  height: calc(100vh - 5rem);
-  box-sizing: border-box;
-  background-color: #2c3335;
-}
-.left-column {
-  flex: 0.7;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 16px;
-  height: 100%;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
+  justify-content: center;
 }
 
-.right-column {
-  flex: 0.3;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 16px;
-  height: 100%;
-  box-sizing: border-box;
+.dashboard-container {
+  width: 100%;
+  max-width: 1200px; /* Slightly smaller */
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* ------------ STATUS CARDS GRID ------------ */
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  background: #fff;
+  padding: 18px 20px;
+  border-radius: 15px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: scale(1.015);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+.stat-icon {
+  font-size: 23px;
+  color: #430cce;
+  background: #acc1f3;
+  padding: 10px;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-content h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700; /* Darker text */
+  color: #1f2937;
+}
+
+.stat-content p {
+  margin: 2px 0 0;
+  font-size: 20px;
+  font-weight: 800;
+  color: #111827;
+}
+
+/* ------------ RECENT ORDERS ------------ */
+.recent-orders-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 22px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+}
+
+.recent-order-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 22px;
+  font-weight: 800; /* Dark + bold */
+  color: #1f2937;
+  margin-bottom: 18px;
+}
+
+/* ------------ TABLE ------------ */
+.orders-table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.orders-table thead tr {
+  background: #f1f5f9;
+}
+
+.orders-table th {
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #374151;
+}
+
+.orders-table tbody tr {
+  background: #fff;
+  transition: 0.2s ease;
+}
+
+.orders-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.orders-table td {
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600; /* bolder text */
+  color: #1f2937;
+}
+
+/* ------------ BADGES ------------ */
+.payment-method,
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 14px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.payment-method.online {
+  background: #dff6ff;
+  color: #0284c7;
+}
+
+.payment-method.cash {
+  background: #e7ffe8;
+  color: #22c55e;
+}
+
+.status-badge.paid {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status-badge.pending {
+  background: #fff7cc;
+  color: #ca8a04;
+}
+
+.status-badge.failed {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* ------------ LOADING + ERROR ------------ */
+.loading,
+.error {
+  text-align: center;
+  font-size: 20px;
+  padding-top: 60px;
 }
