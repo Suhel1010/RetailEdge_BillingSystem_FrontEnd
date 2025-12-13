@@ -40,10 +40,7 @@ const UserForm = ({ setUsers }) => {
   };
 
   return (
-    <div
-      className="user-form-container"
-      style={{ height: '100vh', overflowY: 'auto', overflowX: 'hidden' }}
-    >
+    <div className="user-form-container" style={{ height: '100vh', overflowY: 'auto', overflowX: 'hidden' }}>
       <div className="mx-2 mt-2">
         <div className="row">
           <div className="card col-md-12 form-container">
@@ -61,6 +58,7 @@ const UserForm = ({ setUsers }) => {
                     placeholder="John Doe"
                     onChange={onChangeHandler}
                     value={data.name}
+                    required
                   />
                 </div>
                 <div className="mb-1">
@@ -75,6 +73,7 @@ const UserForm = ({ setUsers }) => {
                     placeholder="yourname@gmail.com"
                     onChange={onChangeHandler}
                     value={data.email}
+                    required
                   />
                 </div>
                 <div className="mb-1">
@@ -89,14 +88,11 @@ const UserForm = ({ setUsers }) => {
                     placeholder="*******************"
                     onChange={onChangeHandler}
                     value={data.password}
+                    required
                   />
                 </div>
                 <br />
-                <button
-                  type="submit"
-                  className="btn btn-primary w-100"
-                  disabled={loading}
-                >
+                <button type="submit" className="btn btn-primary w-100" disabled={loading}>
                   {loading ? (
                     <>
                       <span className="spinner-border spinner-border-sm me-2"></span>

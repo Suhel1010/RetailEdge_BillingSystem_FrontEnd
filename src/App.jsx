@@ -13,6 +13,7 @@ import OrderHistory from './pages/OrderHistory/OrderHistory';
 import { useContext } from 'react';
 import { AppConstant } from './Utils/Constant';
 import { AppContext } from './Context/AppContext';
+import NotFound from './pages/NotFound/NotFound';
 
 const App = () => {
   const { auth } = useContext(AppContext);
@@ -44,36 +45,13 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/explore" element={<Explore />} />
         {/* Admin Routes only */}
-        <Route
-          path="/category"
-          element={
-            <ProtectedRoute
-              element={<ManageCategory />}
-              allowedRole={['ROLE_ADMIN']}
-            />
-          }
-        />
-        <Route
-          path="/users"
-          element={
-            <ProtectedRoute
-              element={<ManageCategory />}
-              allowedRole={['ROLE_ADMIN']}
-            />
-          }
-        />
-        <Route
-          path="/items"
-          element={
-            <ProtectedRoute
-              element={<ManageCategory />}
-              allowedRole={['ROLE_ADMIN']}
-            />
-          }
-        />
+        <Route path="/category" element={<ProtectedRoute element={<ManageCategory />} allowedRole={['ROLE_ADMIN']} />} />
+        <Route path="/users" element={<ProtectedRoute element={<ManageUsers />} allowedRole={['ROLE_ADMIN']} />} />
+        <Route path="/items" element={<ProtectedRoute element={<ManageItems />} allowedRole={['ROLE_ADMIN']} />} />
 
         <Route path="/orders" element={<OrderHistory />} />
         <Route path="/login" element={<LoginRoute element={<Login />} />} />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
     </div>
   );
