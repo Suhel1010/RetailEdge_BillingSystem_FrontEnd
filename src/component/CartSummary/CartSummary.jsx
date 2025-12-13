@@ -4,32 +4,19 @@ import { AppContext } from '../../Context/AppContext';
 import { createOrder, deleteOrder } from '../../service/OrderService';
 import './CartSummary.css';
 
-import React, { useContext, useRef, useState } from 'react';
-import {
-  createRazorpayOrder,
-  verifyPayment,
-} from '../../service/PaymentService';
+import React, { useContext, useState } from 'react';
+import { createRazorpayOrder, verifyPayment } from '../../service/PaymentService';
 import { AppConstant } from '../../Utils/Constant';
 import ReceiptPopup from '../ReceiptPopup/ReceiptPopup';
-import { useReactToPrint } from 'react-to-print';
 
-const CartSummary = ({
-  mobileNumber,
-  setMobileNumber,
-  customerName,
-  setCustomerName,
-}) => {
+const CartSummary = ({ mobileNumber, setMobileNumber, customerName, setCustomerName }) => {
   const { cartItem, clearCart } = useContext(AppContext);
-  const totalAmount = cartItem.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
+  const totalAmount = cartItem.reduce((total, item) => total + item.price * item.quantity, 0);
   const [iseProcessing, setIsProcessing] = useState(false);
   const [orderDetails, setOrderDetails] = useState(null);
   const [shoPopup, setSowPopup] = useState(false);
   const tax = totalAmount * 0.01;
   const grandTotalAmount = totalAmount + tax;
-  const receiptRef = useRef();
 
   const clearAll = () => {
     setCustomerName(''), setMobileNumber(''), clearCart();
@@ -186,33 +173,19 @@ const CartSummary = ({
         </div>
         <div className="d-flex justify-content-between mb-2">
           <span className="text-light">Total Amount :</span>
-          <span className="text-light">
-            &#8377;{grandTotalAmount.toFixed(2)}
-          </span>
+          <span className="text-light">&#8377;{grandTotalAmount.toFixed(2)}</span>
         </div>
       </div>
       <div className="d-flex gap-2" style={{ width: '370px' }}>
-        <button
-          className="btn btn-success w-50 p-1"
-          onClick={() => completePayment('upi')}
-          disabled={iseProcessing}
-        >
+        <button className="btn btn-success w-50 p-1" onClick={() => completePayment('upi')} disabled={iseProcessing}>
           {iseProcessing ? 'processing' : 'UPI'}
         </button>
-        <button
-          className="btn btn-success w-50 p-1"
-          onClick={() => completePayment('cash')}
-          disabled={iseProcessing}
-        >
+        <button className="btn btn-success w-50 p-1" onClick={() => completePayment('cash')} disabled={iseProcessing}>
           {iseProcessing ? 'processing' : 'CASH'}
         </button>
       </div>
       <div className="d-flex gap-2 mt-2">
-        <button
-          className="btn btn-warning btn-sm flex-grow-1 "
-          onClick={placeOrder}
-          disabled={iseProcessing || !orderDetails}
-        >
+        <button className="btn btn-warning btn-sm flex-grow-1 " onClick={placeOrder} disabled={iseProcessing || !orderDetails}>
           Place your order
         </button>
       </div>

@@ -42,66 +42,36 @@ const MenuBar = () => {
         <div className="collapse navbar-collapse p-2" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link
-                className={`nav-link ${
-                  isActive('/dashboard') ? 'fw-bold text-warning' : ''
-                }`}
-                to="/dashboard"
-              >
+              <Link className={`nav-link ${isActive('/dashboard') ? 'fw-bold text-warning' : ''}`} to="/dashboard">
                 Dashboard
               </Link>
             </li>
             <li className="nav-item">
-              <Link
-                className={`nav-link ${
-                  isActive('/explore') ? 'fw-bold text-warning' : ''
-                }`}
-                to="/explore"
-              >
+              <Link className={`nav-link ${isActive('/explore') ? 'fw-bold text-warning' : ''}`} to="/explore">
                 Explore
               </Link>
-            </li> 
+            </li>
             {isAdmin && (
               <>
                 <li className="nav-item">
-                  <Link
-                    className={`nav-link ${
-                      isActive('/items') ? 'fw-bold text-warning' : ''
-                    }`}
-                    to="/items"
-                  >
+                  <Link className={`nav-link ${isActive('/items') ? 'fw-bold text-warning' : ''}`} to="/items">
                     ManageItem
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link
-                    className={`nav-link ${
-                      isActive('/category') ? 'fw-bold text-warning' : ''
-                    }`}
-                    to="/category"
-                  >
+                  <Link className={`nav-link ${isActive('/category') ? 'fw-bold text-warning' : ''}`} to="/category">
                     ManageCategories
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link
-                    className={`nav-link ${
-                      isActive('/users') ? 'fw-bold text-warning' : ''
-                    }`}
-                    to="/users"
-                  >
+                  <Link className={`nav-link ${isActive('/users') ? 'fw-bold text-warning' : ''}`} to="/users">
                     ManageUsers
                   </Link>
                 </li>
               </>
             )}
             <li className="nav-item">
-              <Link
-                className={`nav-link ${
-                  isActive('/orders') ? 'fw-bold text-warning' : ''
-                }`}
-                to="/orders"
-              >
+              <Link className={`nav-link ${isActive('/orders') ? 'fw-bold text-warning' : ''}`} to="/orders">
                 OrderHistory
               </Link>
             </li>
@@ -119,10 +89,7 @@ const MenuBar = () => {
               >
                 <img src={assets.profile} alt="" height={36} width={36} />
               </a>
-              <ul
-                className="dropdown-menu dropdown-menu-end"
-                aria-labelledby="navbarDropdown"
-              >
+              <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li>
                   <a href="#" className="dropdown-item">
                     Setting

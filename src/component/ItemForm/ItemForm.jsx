@@ -30,11 +30,7 @@ const ItemForm = () => {
       if (response.status === 200) {
         setItem([...item, response.data]);
         setCategories(prevCategory =>
-          prevCategory.map(cate =>
-            cate.categoryId === data.categoryId
-              ? { ...cate, items: cate.items + 1 }
-              : cate
-          )
+          prevCategory.map(cate => (cate.categoryId === data.categoryId ? { ...cate, items: cate.items + 1 } : cate))
         );
         toast.success('item added successfully.');
 
@@ -62,10 +58,7 @@ const ItemForm = () => {
   };
 
   return (
-    <div
-      className="item-form-container"
-      style={{ height: '100vh', overflowY: 'auto', overflowX: 'hidden' }}
-    >
+    <div className="item-form-container" style={{ height: '100vh', overflowY: 'auto', overflowX: 'hidden' }}>
       <div className="mx-2 mt-2">
         <div className="row">
           <div className="card col-md-12 form-container ">
@@ -73,20 +66,9 @@ const ItemForm = () => {
               <form onSubmit={onSubmitHandler}>
                 <div className="mb-1">
                   <label htmlFor="image" className="form-label">
-                    <img
-                      src={image ? URL.createObjectURL(image) : assets.upload}
-                      alt=""
-                      width={48}
-                    />
+                    <img src={image ? URL.createObjectURL(image) : assets.upload} alt="" width={48} />
                   </label>
-                  <input
-                    type="file"
-                    name="image"
-                    id="image"
-                    className="form-control"
-                    hidden
-                    onChange={e => setImage(e.target.files[0])}
-                  />
+                  <input type="file" name="image" id="image" className="form-control" hidden onChange={e => setImage(e.target.files[0])} />
                 </div>
                 <div className="mb-1">
                   <label htmlFor="name" className="form-label">
@@ -100,6 +82,7 @@ const ItemForm = () => {
                     placeholder="Product Name"
                     onChange={onChangeHandler}
                     value={data.name}
+                    required
                   />
                 </div>
                 <div className="mb-1">
@@ -112,6 +95,7 @@ const ItemForm = () => {
                     className="form-control"
                     onChange={onChangeHandler}
                     value={data.categoryId}
+                    required
                   >
                     <option value="">-- select category--</option>
                     {categories.map((category, index) => (
@@ -133,6 +117,7 @@ const ItemForm = () => {
                     placeholder="&#8377;200.00"
                     onChange={onChangeHandler}
                     value={data.price}
+                    required
                   />
                 </div>
                 <div className="mb-1">
@@ -150,11 +135,7 @@ const ItemForm = () => {
                   />
                 </div>
 
-                <button
-                  type="submit"
-                  className="btn btn-primary w-100 mt-3 "
-                  disabled={loading}
-                >
+                <button type="submit" className="btn btn-primary w-100 mt-3 " disabled={loading}>
                   {loading ? (
                     <>
                       <span className="spinner-grow spinner-grow-sm me-2"></span>

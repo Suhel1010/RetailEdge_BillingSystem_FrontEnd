@@ -53,10 +53,7 @@ const CategoryForm = () => {
   };
 
   return (
-    <div
-      className="item-form-container"
-      style={{ height: '100vh', overflowY: 'auto', overflowX: 'hidden' }}
-    >
+    <div className="item-form-container" style={{ height: '100vh', overflowY: 'auto', overflowX: 'hidden' }}>
       <div className="mx-2 mt-2">
         <div className="row">
           <div className="card col-md-12 form-container">
@@ -64,20 +61,9 @@ const CategoryForm = () => {
               <form onSubmit={onSubmitHandler}>
                 <div className="mb-1">
                   <label htmlFor="image" className="form-label">
-                    <img
-                      src={image ? URL.createObjectURL(image) : assets.upload}
-                      alt=""
-                      width={48}
-                    />
+                    <img src={image ? URL.createObjectURL(image) : assets.upload} alt="" width={48} />
                   </label>
-                  <input
-                    type="file"
-                    name="image"
-                    id="image"
-                    className="form-control"
-                    hidden
-                    onChange={e => setImage(e.target.files[0])}
-                  />
+                  <input type="file" name="image" id="image" className="form-control" hidden onChange={e => setImage(e.target.files[0])} />
                 </div>
                 <div className="mb-1">
                   <label htmlFor="name" className="form-label">
@@ -91,6 +77,7 @@ const CategoryForm = () => {
                     placeholder="category name"
                     onChange={onChangeHandler}
                     value={data.name}
+                    required
                   />
                 </div>
                 <div className="mb-1">
@@ -105,6 +92,7 @@ const CategoryForm = () => {
                     placeholder="write description here ... "
                     onChange={onChangeHandler}
                     value={data.description}
+                    required
                   />
                 </div>
                 <div className="mb-1">
@@ -112,20 +100,9 @@ const CategoryForm = () => {
                     Background Color
                   </label>
                   <br />
-                  <input
-                    type="Color"
-                    name="bgColor"
-                    id="bgColor"
-                    placeholder="#ffffff"
-                    onChange={onChangeHandler}
-                    value={data.bgColor}
-                  />
+                  <input type="Color" name="bgColor" id="bgColor" placeholder="#ffffff" onChange={onChangeHandler} value={data.bgColor} />
                 </div>
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="btn btn-primary w-100"
-                >
+                <button type="submit" disabled={loading} className="btn btn-primary w-100">
                   {loading ? 'Loading..... ' : 'Submit'}
                 </button>
               </form>

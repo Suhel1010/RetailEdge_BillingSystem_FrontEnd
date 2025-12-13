@@ -15,9 +15,7 @@ const CategoryList = () => {
     try {
       const response = await deleteCategory(categoryId);
       if (response.status == 204) {
-        const updatedCategories = categories.filter(
-          category => category.categoryId !== categoryId
-        );
+        const updatedCategories = categories.filter(category => category.categoryId !== categoryId);
         setCategories(updatedCategories);
         toast.success('category deleted successfully.');
       } else {
@@ -29,10 +27,7 @@ const CategoryList = () => {
     }
   };
   return (
-    <div
-      className="category_list_container"
-      style={{ height: '100vh', overflowY: 'auto', overflowX: 'hidden' }}
-    >
+    <div className="category_list_container" style={{ height: '100vh', overflowY: 'auto', overflowX: 'hidden' }}>
       <div className="row pe-2">
         <div className="input-group mb-3">
           <input
@@ -52,27 +47,17 @@ const CategoryList = () => {
       <div className="row g-3 pe-2">
         {filterCategories.map((category, index) => (
           <div key={index} className="col-12">
-            <div
-              className="p-3  rounded-2"
-              style={{ backgroundColor: category.bgColor }}
-            >
+            <div className="p-3  rounded-2" style={{ backgroundColor: category.bgColor }}>
               <div className="d-flex align-items-center">
                 <div style={{ marginRight: '15px' }}>
-                  <img
-                    src={category.imgUrl}
-                    alt={category.name}
-                    className="category_image"
-                  />
+                  <img src={category.imgUrl} alt={category.name} className="category_image" />
                 </div>
                 <div className="flex-grow-1">
                   <h5 className="mb-1 text-white">{category.name}</h5>
                   <p className="mb-0 text-white">{category.items} items</p>
                 </div>
                 <div>
-                  <button
-                    className=" btn btn-danger btn-sm"
-                    onClick={() => deleteByCategoryId(category.categoryId)}
-                  >
+                  <button className=" btn btn-danger btn-sm" onClick={() => deleteByCategoryId(category.categoryId)}>
                     <i className="bi bi-trash"></i>
                   </button>
                 </div>
