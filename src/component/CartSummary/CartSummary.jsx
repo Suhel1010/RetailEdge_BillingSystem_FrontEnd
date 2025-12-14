@@ -6,7 +6,6 @@ import './CartSummary.css';
 
 import React, { useContext, useState } from 'react';
 import { createRazorpayOrder, verifyPayment } from '../../service/PaymentService';
-import { AppConstant } from '../../Utils/Constant';
 import ReceiptPopup from '../ReceiptPopup/ReceiptPopup';
 
 const CartSummary = ({ mobileNumber, setMobileNumber, customerName, setCustomerName }) => {
@@ -85,7 +84,7 @@ const CartSummary = ({ mobileNumber, setMobileNumber, customerName, setCustomerN
             currency: 'INR',
           });
           const options = {
-            key: AppConstant.RAZORPAY_KEY_ID,
+            key: import.meta.env.VITE_RAZORPAY_API_KEY,
             amount: razorpayResponse.data.amount,
             currency: razorpayResponse.data.currency,
             order_id: razorpayResponse.data.id,
