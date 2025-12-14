@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable react/react-in-jsx-scope */
 import { Navigate, Route, Routes, useMatch } from 'react-router-dom';
@@ -11,7 +12,6 @@ import { Toaster } from 'react-hot-toast';
 import Login from './pages/Login/Login';
 import OrderHistory from './pages/OrderHistory/OrderHistory';
 import { useContext } from 'react';
-import { AppConstant } from './Utils/Constant';
 import { AppContext } from './Context/AppContext';
 import NotFound from './pages/NotFound/NotFound';
 
